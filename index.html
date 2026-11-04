@@ -135,8 +135,10 @@
       <a href="#home" class="hover:text-white">Home</a>
       <a href="#tools" class="hover:text-white">Tools</a>
       <a href="#about" class="hover:text-white">About</a>
-      <a href="#" class="hover:text-white">Privacy</a>
-      <a href="#" class="hover:text-white">Contact</a>
+          <button onclick="openLegalModal('privacy')" class="hover:text-white bg-transparent border-none cursor-pointer text-slate-300 p-0">Privacy Policy</button>
+          <button onclick="openLegalModal('terms')" class="hover:text-white bg-transparent border-none cursor-pointer text-slate-300 p-0">Terms</button>
+
+      
     </nav>
   </div>
 </footer>
@@ -447,6 +449,40 @@
   renderFilters();
   renderGrid();
 })();
+<!-- Legal Content Modal -->
+<div id="legal-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/80 backdrop-blur-sm">
+    <div class="bg-white text-slate-800 w-full max-w-2xl rounded-2xl shadow-xl max-h-[80vh] flex flex-col">
+        <div class="flex items-center justify-between p-5 border-b border-slate-200">
+            <h3 id="legal-title" class="text-xl font-bold">Policy</h3>
+            <button onclick="closeLegalModal()" class="p-2 rounded-lg hover:bg-slate-100 font-bold text-lg">&times;</button>
+        </div>
+        <div id="legal-body" class="p-6 overflow-y-auto text-sm space-y-4 text-slate-600">
+            <!-- Dynamic Content -->
+        </div>
+    </div>
+</div>
+
+<script>
+const legalContent = {
+    privacy: {
+        title: "Privacy Policy for ToolBox India",
+        text: `Welcome to ToolBox India. We respect your privacy and are committed to protecting it. Our utility tools run directly in your browser. We do not store your personal data, dates of birth, or generated QR code content on any servers. All computations happen locally on your device.`
+    },
+    terms: {
+        title: "Terms & Conditions",
+        text: `By using ToolBox India, you agree to use our free online utility tools responsibly. The tools are provided "as is" without any guarantees. While we strive for accuracy, we are not responsible for any errors in calculations or generated content.`
+    }
+};
+
+function openLegalModal(type) {
+    document.getElementById('legal-title').innerText = legalContent[type].title;
+    document.getElementById('legal-body').innerHTML = `<p>${legalContent[type].text}</p>`;
+    document.getElementById('legal-modal').classList.remove('hidden');
+}
+
+function closeLegalModal() {
+    document.getElementById('legal-modal').classList.add('hidden');
+}  
 </script>
 </body>
 </html>
