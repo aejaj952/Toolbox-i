@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ToolBox India – Free Online Calculators, Generators &amp; Converters</title>
+<meta name="description" content="Free, fast online tools: age calculator, QR code generator and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { display: ['"Bricolage Grotesque"', 'sans-serif'], sans: ['Figtree', 'system-ui', 'sans-serif'] },
+        colors: { ink: '#14213d', saffron: '#f28c28', leaf: '#138808', paper: '#f7f8fb' }
+      }
+    }
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  :focus-visible { outline: 2px solid #f28c28; outline-offset: 2px; }
+  #qr-output img, #qr-output canvas { max-width: 100%; height: auto; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes popIn { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: none; } }
+  #modal .m-back { animation: fadeIn .2s ease-out both; }
+  #modal .m-panel { animation: popIn .25s cubic-bezier(.2,.8,.2,1) both; }
+  #modal.closing .m-back { animation: fadeIn .18s ease-in reverse both; }
+  #modal.closing .m-panel { animation: popIn .18s ease-in reverse both; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+    #modal .m-back, #modal .m-panel { animation: none !important; }
+  }
+</style>
+</head>
+<body class="bg-paper text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+<!-- Header -->
+<header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center gap-4">
+    <a href="#home" class="flex items-center gap-2 shrink-0" aria-label="ToolBox India home">
+      <span class="w-9 h-9 rounded-lg bg-ink text-white grid place-items-center">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>
+      </span>
+      <span class="font-display font-extrabold text-lg text-ink leading-none">ToolBox <span class="text-saffron">India</span></span>
+    </a>
+
+    <div class="relative flex-1 max-w-md ml-auto md:ml-6">
+      <label for="search" class="sr-only">Search tools</label>
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="search" type="search" placeholder="Search tools" autocomplete="off"
+        class="w-full h-10 pl-9 pr-3 rounded-lg border border-slate-200 bg-slate-50 text-sm focus:bg-white focus:border-ink focus:outline-none">
+    </div>
+
+    <nav class="hidden md:flex items-center gap-1 text-sm font-medium" aria-label="Main">
+      <a href="#home" class="px-3 py-2 rounded-md hover:bg-slate-100">Home</a>
+      <a href="#tools" class="px-3 py-2 rounded-md hover:bg-slate-100">Tools</a>
+      <a href="#about" class="px-3 py-2 rounded-md hover:bg-slate-100">About</a>
+    </nav>
+
+    <button id="menu-btn" class="md:hidden p-2 rounded-md hover:bg-slate-100" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <nav id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-2 text-sm font-medium" aria-label="Mobile">
+    <a href="#home" class="block py-2">Home</a>
+    <a href="#tools" class="block py-2">Tools</a>
+    <a href="#about" class="block py-2">About</a>
+  </nav>
+</header>
+
+<main class="flex-1">
+  <!-- Hero -->
+  <section id="home" class="bg-ink text-white">
+    <div class="max-w-6xl mx-auto px-4 py-14 md:py-20">
+      <h1 class="font-display font-extrabold text-4xl md:text-5xl leading-tight max-w-2xl">Everyday tools, ready when you are.</h1>
+      <p class="mt-4 text-slate-300 text-lg max-w-xl">Free calculators, generators and converters. No sign-up, no downloads, and nothing you type leaves your device.</p>
+      <a href="#tools" class="inline-flex mt-8 h-11 items-center px-6 rounded-lg bg-saffron text-ink font-semibold hover:brightness-110 transition">Browse tools</a>
+    </div>
+    <div class="h-1.5 flex"><span class="flex-1 bg-saffron"></span><span class="flex-1 bg-white"></span><span class="flex-1 bg-leaf"></span></div>
+  </section>
+
+  <!-- Tools -->
+  <section id="tools" class="max-w-6xl mx-auto px-4 py-12 scroll-mt-16">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <h2 class="font-display font-bold text-2xl text-ink">All tools</h2>
+      <div id="filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter tools by category"></div>
+    </div>
+    <div id="grid" class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+    <p id="empty" class="hidden mt-8 text-center text-slate-500">No tools match your search. Try a different word or choose All.</p>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="bg-white border-t border-slate-200 scroll-mt-16">
+    <div class="max-w-3xl mx-auto px-4 py-12">
+      <h2 class="font-display font-bold text-2xl text-ink">About ToolBox India</h2>
+      <p class="mt-3 text-slate-600 leading-relaxed">ToolBox India is a growing set of simple utilities built for speed. Every tool runs in your browser, so your dates, links and text stay on your device. More calculators and converters are on the way.</p>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-ink text-slate-300">
+  <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between text-sm">
+    <p>&copy; <span id="year"></span> ToolBox India. All rights reserved.</p>
+    <nav class="flex flex-wrap gap-x-5 gap-y-2" aria-label="Footer">
+      <a href="#home" class="hover:text-white">Home</a>
+      <a href="#tools" class="hover:text-white">Tools</a>
+      <a href="#about" class="hover:text-white">About</a>
+      <a href="#" class="hover:text-white">Privacy</a>
+      <a href="#" class="hover:text-white">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Modal -->
+<div id="modal" class="hidden fixed inset-0 z-40" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="backdrop" class="m-back absolute inset-0 bg-ink/60"></div>
+  <div class="absolute inset-0 overflow-y-auto p-4 flex items-start sm:items-center justify-center">
+    <div class="m-panel relative w-full max-w-lg bg-white rounded-2xl shadow-xl">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-slate-200">
+        <h3 id="modal-title" class="font-display font-bold text-lg text-ink"></h3>
+        <button id="modal-close" class="p-2 -mr-2 rounded-md hover:bg-slate-100" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <!-- Age calculator -->
+      <div id="tool-age" class="hidden p-5">
+        <label for="dob" class="block text-sm font-semibold mb-1">Date of birth</label>
+        <input id="dob" type="date" class="w-full h-11 px-3 rounded-lg border border-slate-300 focus:border-ink focus:outline-none">
+        <p id="age-error" class="hidden mt-2 text-sm text-red-600" role="alert"></p>
+        <button id="age-btn" class="mt-4 w-full h-11 rounded-lg bg-ink text-white font-semibold hover:bg-slate-800 transition">Calculate age</button>
+
+        <div id="age-result" class="hidden mt-5">
+          <p class="text-sm text-slate-500">Your exact age</p>
+          <div class="mt-2 grid grid-cols-3 gap-2 text-center">
+            <div class="rounded-lg bg-slate-50 border border-slate-200 py-3"><div id="r-years" class="font-display font-bold text-2xl text-ink">0</div><div class="text-xs text-slate-500">years</div></div>
+            <div class="rounded-lg bg-slate-50 border border-slate-200 py-3"><div id="r-months" class="font-display font-bold text-2xl text-ink">0</div><div class="text-xs text-slate-500">months</div></div>
+            <div class="rounded-lg bg-slate-50 border border-slate-200 py-3"><div id="r-days" class="font-display font-bold text-2xl text-ink">0</div><div class="text-xs text-slate-500">days</div></div>
+            <div class="rounded-lg bg-slate-50 border border-slate-200 py-3 col-start-1"><div id="r-hours" class="font-display font-bold text-2xl text-ink">0</div><div class="text-xs text-slate-500">hours</div></div>
+            <div class="rounded-lg bg-slate-50 border border-slate-200 py-3"><div id="r-minutes" class="font-display font-bold text-2xl text-ink">0</div><div class="text-xs text-slate-500">minutes</div></div>
+          </div>
+          <dl class="mt-4 text-sm divide-y divide-slate-100 border border-slate-200 rounded-lg">
+            <div class="flex justify-between px-3 py-2"><dt class="text-slate-500">Total days lived</dt><dd id="t-days" class="font-semibold"></dd></div>
+            <div class="flex justify-between px-3 py-2"><dt class="text-slate-500">Total hours lived</dt><dd id="t-hours" class="font-semibold"></dd></div>
+            <div class="flex justify-between px-3 py-2"><dt class="text-slate-500">Total minutes lived</dt><dd id="t-minutes" class="font-semibold"></dd></div>
+            <div class="flex justify-between px-3 py-2"><dt class="text-slate-500">Next birthday</dt><dd id="t-next" class="font-semibold text-right"></dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- QR generator -->
+      <div id="tool-qr" class="hidden p-5">
+        <label for="qr-text" class="block text-sm font-semibold mb-1">Text or URL</label>
+        <textarea id="qr-text" rows="3" maxlength="800" placeholder="https://example.com" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-ink focus:outline-none resize-none"></textarea>
+        <div class="mt-3">
+          <label for="qr-size" class="block text-sm font-semibold mb-1">Size</label>
+          <select id="qr-size" class="w-full h-11 px-3 rounded-lg border border-slate-300 bg-white focus:border-ink focus:outline-none">
+            <option value="192">Small (192 px)</option>
+            <option value="256" selected>Medium (256 px)</option>
+            <option value="384">Large (384 px)</option>
+          </select>
+        </div>
+        <p id="qr-error" class="hidden mt-2 text-sm text-red-600" role="alert"></p>
+        <div id="qr-box" class="hidden mt-5 text-center">
+          <div class="inline-block p-3 bg-white border border-slate-200 rounded-xl"><div id="qr-output"></div></div>
+          <button id="qr-download" class="mt-4 w-full h-11 rounded-lg bg-saffron text-ink font-semibold hover:brightness-110 transition">Download QR code (PNG)</button>
+        </div>
+        <p id="qr-hint" class="mt-4 text-sm text-slate-500">Start typing and your QR code appears instantly.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---------- Tool catalogue ----------
+  var TOOLS = [
+    { id: 'age', name: 'Age Calculator', category: 'Calculators',
+      desc: 'Find your exact age in years, months, days, hours and minutes.',
+      icon: '<path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>' },
+    { id: 'qr', name: 'QR Code Generator', category: 'Generators',
+      desc: 'Turn any text or link into a QR code you can download.',
+      icon: '<path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM20 14v3M14 20h3M20 20v1"/>' }
+  ];
+  var CATEGORIES = ['All', 'Calculators', 'Generators', 'Converters'];
+  var state = { category: 'All', query: '' };
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  // ---------- Filters + grid ----------
+  function renderFilters() {
+    var wrap = $('filters');
+    wrap.innerHTML = '';
+    CATEGORIES.forEach(function (c) {
+      var b = document.createElement('button');
+      var active = c === state.category;
+      b.type = 'button';
+      b.textContent = c;
+      b.setAttribute('aria-pressed', active);
+      b.className = 'h-9 px-4 rounded-full text-sm font-medium border transition ' +
+        (active ? 'bg-ink text-white border-ink' : 'bg-white text-slate-700 border-slate-300 hover:border-ink');
+      b.addEventListener('click', function () { state.category = c; renderFilters(); renderGrid(); });
+      wrap.appendChild(b);
+    });
+  }
+
+  function renderGrid() {
+    var grid = $('grid');
+    var q = state.query.trim().toLowerCase();
+    var list = TOOLS.filter(function (t) {
+      var inCat = state.category === 'All' || t.category === state.category;
+      var inQuery = !q || (t.name + ' ' + t.desc + ' ' + t.category).toLowerCase().indexOf(q) !== -1;
+      return inCat && inQuery;
+    });
+    grid.innerHTML = '';
+    list.forEach(function (t) {
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'text-left bg-white border border-slate-200 rounded-xl p-5 hover:border-ink hover:shadow-md transition flex flex-col';
+      card.innerHTML =
+        '<span class="w-11 h-11 rounded-lg bg-ink/5 text-ink grid place-items-center">' +
+        '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + t.icon + '</svg></span>' +
+        '<span class="mt-4 font-display font-bold text-lg text-ink">' + t.name + '</span>' +
+        '<span class="mt-1 text-sm text-slate-600 flex-1">' + t.desc + '</span>' +
+        '<span class="mt-4 text-xs font-semibold text-leaf">' + t.category + '</span>';
+      card.addEventListener('click', function () { openTool(t.id); });
+      grid.appendChild(card);
+    });
+    $('empty').classList.toggle('hidden', list.length > 0);
+  }
+
+  // ---------- Header behaviour ----------
+  $('search').addEventListener('input', function (e) {
+    state.query = e.target.value;
+    renderGrid();
+  });
+  $('search').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') $('tools').scrollIntoView();
+  });
+  $('menu-btn').addEventListener('click', function () {
+    var m = $('mobile-menu');
+    var open = m.classList.toggle('hidden') === false;
+    this.setAttribute('aria-expanded', open);
+  });
+  $('mobile-menu').addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { this.classList.add('hidden'); $('menu-btn').setAttribute('aria-expanded', 'false'); }
+  });
+  $('year').textContent = new Date().getFullYear();
+
+  // ---------- Modal ----------
+  var lastFocus = null;
+  function openTool(id) {
+    var tool = TOOLS.filter(function (t) { return t.id === id; })[0];
+    if (!tool) return;
+    lastFocus = document.activeElement;
+    $('modal-title').textContent = tool.name;
+    $('tool-age').classList.toggle('hidden', id !== 'age');
+    $('tool-qr').classList.toggle('hidden', id !== 'qr');
+    $('modal').classList.remove('closing', 'hidden');
+    $('modal').querySelector('.m-panel').parentNode.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    if (id === 'age') { $('dob').max = toISODate(new Date()); $('dob').focus(); }
+    if (id === 'qr') { $('qr-text').focus(); }
+  }
+  var closing = false;
+  function closeModal() {
+    if (closing || $('modal').classList.contains('hidden')) return;
+    closing = true;
+    $('modal').classList.add('closing');
+    setTimeout(function () {
+      $('modal').classList.add('hidden');
+      $('modal').classList.remove('closing');
+      document.body.style.overflow = '';
+      closing = false;
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }, 180);
+  }
+  $('modal-close').addEventListener('click', closeModal);
+  $('backdrop').addEventListener('click', closeModal);
+  document.addEventListener('keydown', function (e) {
+    if ($('modal').classList.contains('hidden')) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'Tab') { // keep keyboard focus inside the open tool
+      var items = Array.prototype.filter.call(
+        $('modal').querySelectorAll('button, input, select, textarea, a[href]'),
+        function (el) { return el.offsetParent !== null && !el.disabled; });
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  // ---------- Age calculator ----------
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function toISODate(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function fmt(n) { return Number(n).toLocaleString('en-IN'); }
+
+  function calcAge() {
+    var err = $('age-error');
+    var val = $('dob').value;
+    err.classList.add('hidden');
+    $('age-result').classList.add('hidden');
+
+    if (!val) { err.textContent = 'Choose your date of birth to continue.'; err.classList.remove('hidden'); return; }
+    var p = val.split('-').map(Number);
+    var dob = new Date(p[0], p[1] - 1, p[2]);
+    var now = new Date();
+    if (isNaN(dob.getTime()) || p[0] < 1900) { err.textContent = 'Enter a valid date of birth (1900 or later).'; err.classList.remove('hidden'); return; }
+    if (dob > now) { err.textContent = 'Date of birth cannot be in the future.'; err.classList.remove('hidden'); return; }
+
+    var y = now.getFullYear() - dob.getFullYear();
+    var m = now.getMonth() - dob.getMonth();
+    var d = now.getDate() - dob.getDate();
+    if (d < 0) {
+      m -= 1;
+      d += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); // days in previous month
+    }
+    if (m < 0) { y -= 1; m += 12; }
+
+    // Born at 00:00 on the chosen date, so hours/minutes are time elapsed today
+    var h = now.getHours();
+    var min = now.getMinutes();
+
+    var diffMs = now - dob;
+    var totalMin = Math.floor(diffMs / 60000);
+    var totalHrs = Math.floor(diffMs / 3600000);
+    var totalDays = Math.floor(diffMs / 86400000);
+
+    var next = new Date(now.getFullYear(), dob.getMonth(), dob.getDate());
+    if (next < new Date(now.getFullYear(), now.getMonth(), now.getDate())) {
+      next = new Date(now.getFullYear() + 1, dob.getMonth(), dob.getDate());
+    }
+    var today0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var daysLeft = Math.round((next - today0) / 86400000);
+    var nextText = daysLeft === 0 ? 'Today! 🎉' :
+      next.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) +
+      ' (' + daysLeft + (daysLeft === 1 ? ' day' : ' days') + ')';
+
+    $('r-years').textContent = y;
+    $('r-months').textContent = m;
+    $('r-days').textContent = d;
+    $('r-hours').textContent = h;
+    $('r-minutes').textContent = min;
+    $('t-days').textContent = fmt(totalDays);
+    $('t-hours').textContent = fmt(totalHrs);
+    $('t-minutes').textContent = fmt(totalMin);
+    $('t-next').textContent = nextText;
+    $('age-result').classList.remove('hidden');
+  }
+  $('age-btn').addEventListener('click', calcAge);
+  $('dob').addEventListener('keydown', function (e) { if (e.key === 'Enter') calcAge(); });
+
+  // ---------- QR generator ----------
+  var qrInstance = null;
+  var qrTimer = null;
+
+  function makeQR() {
+    var text = $('qr-text').value.trim();
+    var out = $('qr-output');
+    var err = $('qr-error');
+    err.classList.add('hidden');
+    out.innerHTML = '';
+    qrInstance = null;
+
+    if (!text) {
+      $('qr-box').classList.add('hidden');
+      $('qr-hint').classList.remove('hidden');
+      return;
+    }
+    if (typeof QRCode === 'undefined') {
+      err.textContent = 'The QR library could not load. Check your internet connection and refresh the page.';
+      err.classList.remove('hidden');
+      return;
+    }
+    var size = parseInt($('qr-size').value, 10) || 256;
+    try {
+      qrInstance = new QRCode(out, {
+        text: text, width: size, height: size,
+        colorDark: '#14213d', colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      $('qr-box').classList.remove('hidden');
+      $('qr-hint').classList.add('hidden');
+    } catch (e) {
+      out.innerHTML = '';
+      $('qr-box').classList.add('hidden');
+      err.textContent = 'That text is too long for a QR code. Shorten it and try again.';
+      err.classList.remove('hidden');
+    }
+  }
+  function scheduleQR() { clearTimeout(qrTimer); qrTimer = setTimeout(makeQR, 150); }
+  $('qr-text').addEventListener('input', scheduleQR);
+  $('qr-size').addEventListener('change', makeQR);
+
+  $('qr-download').addEventListener('click', function () {
+    var out = $('qr-output');
+    var canvas = out.querySelector('canvas');
+    var img = out.querySelector('img');
+    var url = '';
+    try {
+      if (canvas) url = canvas.toDataURL('image/png');
+      else if (img && img.src) url = img.src;
+    } catch (e) { url = img && img.src ? img.src : ''; }
+    if (!url) { return; }
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'toolbox-india-qr.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+
+  // ---------- Init ----------
+  renderFilters();
+  renderGrid();
+})();
+</script>
+</body>
+</html>
