@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Age Calculator & QR Code Generator – Free Online Tools | ToolBox India</title>
-<meta name="description" content="Free online Age Calculator (exact age in years, months, days) and QR Code Generator (download PNG). No sign-up, private, works on mobile. By ToolBox India.">
-<meta name="keywords" content="age calculator, calculate age from date of birth, exact age calculator, QR code generator, free QR code maker, online tools India">
+<title>Age Calculator, QR Code Generator & Image to PDF Converter – Free Online Tools | ToolBox India</title>
+<meta name="description" content="Free online Age Calculator, QR Code Generator and Image to PDF Converter. Combine JPG, PNG and WebP photos into one PDF. No sign-up, private, works on mobile. By ToolBox India.">
+<meta name="keywords" content="age calculator, calculate age from date of birth, exact age calculator, QR code generator, free QR code maker, image to PDF, JPG to PDF, PNG to PDF, convert photos to PDF, online tools India">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#14213d">
 <link rel="canonical" href="https://aejaj952.github.io/Toolbox-i/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolBox India">
-<meta property="og:title" content="ToolBox India – Free Age Calculator & QR Code Generator">
-<meta property="og:description" content="Calculate your exact age and create downloadable QR codes. Free, fast and private.">
+<meta property="og:title" content="ToolBox India – Free Age Calculator, QR Code Generator & Image to PDF">
+<meta property="og:description" content="Calculate your exact age, create downloadable QR codes and convert images to PDF. Free, fast and private.">
 <meta property="og:url" content="https://aejaj952.github.io/Toolbox-i/">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2314213d'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%23f28c28'/%3E%3C/svg%3E">
@@ -21,6 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 <script>
   tailwind.config = { theme: { extend: {
     fontFamily: { display: ['"Bricolage Grotesque"', 'sans-serif'], sans: ['Figtree', 'system-ui', 'sans-serif'] },
@@ -35,7 +36,7 @@
   "@context": "https://schema.org",
   "@graph": [
     { "@type": "WebSite", "@id": "https://aejaj952.github.io/Toolbox-i/#website", "url": "https://aejaj952.github.io/Toolbox-i/", "name": "ToolBox India", "inLanguage": "en-IN",
-      "description": "Free online age calculator and QR code generator." },
+      "description": "Free online age calculator, QR code generator and image to PDF converter." },
     { "@type": "WebApplication", "name": "Age Calculator", "url": "https://aejaj952.github.io/Toolbox-i/#age-calculator",
       "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)",
       "description": "Calculate your exact age in years, months, days, hours and minutes from your date of birth.",
@@ -43,6 +44,10 @@
     { "@type": "WebApplication", "name": "QR Code Generator", "url": "https://aejaj952.github.io/Toolbox-i/#qr-generator",
       "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)",
       "description": "Create a QR code from any link or text and download it as a PNG image.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }, "isPartOf": { "@id": "https://aejaj952.github.io/Toolbox-i/#website" } },
+    { "@type": "WebApplication", "name": "Image to PDF Converter", "url": "https://aejaj952.github.io/Toolbox-i/#pdf-converter",
+      "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)",
+      "description": "Combine JPG, PNG, WebP, GIF and BMP images into a single PDF with page size, margin and quality options. Runs in your browser; files are never uploaded.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }, "isPartOf": { "@id": "https://aejaj952.github.io/Toolbox-i/#website" } },
     { "@type": "FAQPage", "mainEntity": [
       { "@type": "Question", "name": "How do I calculate my exact age from my date of birth?",
@@ -56,7 +61,17 @@
       { "@type": "Question", "name": "What can I put inside a QR code?",
         "acceptedAnswer": { "@type": "Answer", "text": "Website links, plain text, phone numbers, email addresses or Wi-Fi details written as text. Short content makes a simpler code that scans faster." } },
       { "@type": "Question", "name": "Do the QR codes I create expire?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. These are static QR codes: the content is encoded in the image itself, so the code keeps working as long as the link or text is still valid." } }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. These are static QR codes: the content is encoded in the image itself, so the code keeps working as long as the link or text is still valid." } },
+      { "@type": "Question", "name": "How do I convert images to PDF online for free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Choose or drag in your JPG, PNG or WebP images, arrange them in the order you want, pick a page size and press Create PDF. The PDF is built in your browser and downloads straight away, with no sign-up and no watermark." } },
+      { "@type": "Question", "name": "Are my images uploaded to a server when I make a PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The conversion happens entirely inside your browser, so your photos and documents never leave your device." } },
+      { "@type": "Question", "name": "Which image formats and how many images can I convert to PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JPG, PNG, WebP, GIF and BMP images are supported, up to 30 images per PDF and 20 MB per image. Each image becomes one page, in the order shown in the list." } },
+      { "@type": "Question", "name": "Can I choose the page size and reduce the PDF file size?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Choose A4, US Letter or a page that fits each image, set the margin, and pick High, Medium or Small quality. Small quality gives a lighter PDF that is easier to upload to government and college portals." } },
+      { "@type": "Question", "name": "Can I change the order of the pages before creating the PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the up and down buttons next to each image to move it, or the remove button to delete it, before you press Create PDF." } }
     ] }
   ]
 }
@@ -65,6 +80,8 @@
   html { scroll-behavior: smooth; }
   :focus-visible { outline: 2px solid #f28c28; outline-offset: 2px; }
   #qr-output img, #qr-output canvas { max-width: 100%; height: auto; }
+  #pdf-drop.is-over { border-color: #f28c28; background: #fff7ec; }
+  #pdf-drop:focus-within { outline: 2px solid #f28c28; outline-offset: 2px; }
   details > summary { list-style: none; cursor: pointer; }
   details > summary::-webkit-details-marker { display: none; }
   details[open] .chev { transform: rotate(180deg); }
@@ -84,6 +101,7 @@
     <nav class="hidden md:flex items-center gap-1 text-sm font-medium" aria-label="Main">
       <a href="#age-calculator" class="px-3 py-2 rounded-md hover:bg-slate-100">Age Calculator</a>
       <a href="#qr-generator" class="px-3 py-2 rounded-md hover:bg-slate-100">QR Code Generator</a>
+      <a href="#pdf-converter" class="px-3 py-2 rounded-md hover:bg-slate-100">Image to PDF</a>
       <a href="#faq" class="px-3 py-2 rounded-md hover:bg-slate-100">FAQ</a>
       <a href="#about" class="px-3 py-2 rounded-md hover:bg-slate-100">About</a>
     </nav>
@@ -94,6 +112,7 @@
   <nav id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-2 text-sm font-medium" aria-label="Mobile">
     <a href="#age-calculator" class="block py-2">Age Calculator</a>
     <a href="#qr-generator" class="block py-2">QR Code Generator</a>
+    <a href="#pdf-converter" class="block py-2">Image to PDF</a>
     <a href="#faq" class="block py-2">FAQ</a>
     <a href="#about" class="block py-2">About</a>
   </nav>
@@ -102,11 +121,12 @@
 <main class="flex-1">
   <section id="home" class="bg-ink text-white">
     <div class="max-w-6xl mx-auto px-4 py-14 md:py-20">
-      <h1 class="font-display font-extrabold text-4xl md:text-5xl leading-tight max-w-3xl">Free Age Calculator and QR Code Generator</h1>
-      <p class="mt-4 text-slate-300 text-lg max-w-2xl">Work out your exact age from your date of birth, or turn any link into a downloadable QR code. No sign-up, no downloads, and nothing you type leaves your device.</p>
+      <h1 class="font-display font-extrabold text-4xl md:text-5xl leading-tight max-w-3xl">Free Age Calculator, QR Code Generator and Image to PDF Converter</h1>
+      <p class="mt-4 text-slate-300 text-lg max-w-2xl">Work out your exact age from your date of birth, turn any link into a downloadable QR code, or combine your photos into one PDF. No sign-up, no software to install, and nothing you enter or choose leaves your device.</p>
       <div class="mt-8 flex flex-wrap gap-3">
         <a href="#age-calculator" class="inline-flex h-11 items-center px-6 rounded-lg bg-saffron text-ink font-semibold hover:brightness-110 transition">Calculate my age</a>
         <a href="#qr-generator" class="inline-flex h-11 items-center px-6 rounded-lg border border-white/30 font-semibold hover:bg-white/10 transition">Make a QR code</a>
+        <a href="#pdf-converter" class="inline-flex h-11 items-center px-6 rounded-lg border border-white/30 font-semibold hover:bg-white/10 transition">Images to PDF</a>
       </div>
     </div>
     <div class="h-1.5 flex"><span class="flex-1 bg-saffron"></span><span class="flex-1 bg-white"></span><span class="flex-1 bg-leaf"></span></div>
@@ -197,181 +217,10 @@
     </div>
   </section>
 
-  <!-- ============ FAQ ============ -->
-  <section id="faq" class="max-w-3xl mx-auto px-4 py-12 scroll-mt-16">
-    <h2 class="font-display font-bold text-3xl text-ink">Frequently asked questions</h2>
+  <!-- ============ IMAGE TO PDF ============ -->
+  <section id="pdf-converter" class="border-b border-slate-200 scroll-mt-16">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+      <h2 class="font-display font-bold text-3xl text-ink">Image to PDF Converter: combine photos into one PDF</h2>
+      <p class="mt-2 text-slate-600 max-w-3xl">Add JPG, PNG or WebP images, put them in order and download a single PDF. Ideal for scanned documents, certificates, ID proofs and application forms. Everything happens in your browser, so your files are never uploaded.</p>
 
-    <h3 class="mt-6 font-display font-bold text-lg text-leaf">About the Age Calculator</h3>
-    <div class="mt-3 space-y-3">
-      <details class="bg-white border border-slate-200 rounded-xl p-4">
-        <summary class="flex justify-between gap-3 font-semibold text-ink">How do I calculate my exact age from my date of birth?<svg class="chev shrink-0 transition" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <p class="mt-2 text-slate-600">Select your date of birth and press Calculate age. The tool subtracts it from today's date and shows your age in years, months and days, plus total days, hours and minutes lived.</p>
-      </details>
-      <details class="bg-white border border-slate-200 rounded-xl p-4">
-        <summary class="flex justify-between gap-3 font-semibold text-ink">Does the age calculator handle leap years?<svg class="chev shrink-0 transition" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <p class="mt-2 text-slate-600">Yes. It uses your device's calendar, so leap years and the different lengths of each month are counted correctly.</p>
-      </details>
-      <details class="bg-white border border-slate-200 rounded-xl p-4">
-        <summary class="flex justify-between gap-3 font-semibold text-ink">Is my date of birth stored or sent anywhere?<svg class="chev shrink-0 transition" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <p class="mt-2 text-slate-600">No. The calculation runs entirely in your browser and your date of birth is never uploaded or saved.</p>
-      </details>
-    </div>
-
-    <h3 class="mt-8 font-display font-bold text-lg text-leaf">About the QR Code Generator</h3>
-    <div class="mt-3 space-y-3">
-      <details class="bg-white border border-slate-200 rounded-xl p-4">
-        <summary class="flex justify-between gap-3 font-semibold text-ink">Is the QR code generator free?<svg class="chev shrink-0 transition" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <p class="mt-2 text-slate-600">Yes. You can create and download unlimited QR codes for free, with no registration and no watermark.</p>
-      </details>
-      <details class="bg-white border border-slate-200 rounded-xl p-4">
-        <summary class="flex justify-between gap-3 font-semibold text-ink">What can I put inside a QR code?<svg class="chev shrink-0 transition" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <p class="mt-2 text-slate-600">Website links, plain text, phone numbers, email addresses or Wi-Fi details written as text. Short content makes a simpler code that scans faster.</p>
-      </details>
-      <details class="bg-white border border-slate-200 rounded-xl p-4">
-        <summary class="flex justify-between gap-3 font-semibold text-ink">Do the QR codes I create expire?<svg class="chev shrink-0 transition" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <p class="mt-2 text-slate-600">No. These are static QR codes: the content is encoded in the image itself, so the code keeps working as long as the link or text is still valid.</p>
-      </details>
-    </div>
-  </section>
-
-  <!-- ============ ABOUT ============ -->
-  <section id="about" class="bg-white border-t border-slate-200 scroll-mt-16">
-    <div class="max-w-3xl mx-auto px-4 py-12">
-      <h2 class="font-display font-bold text-3xl text-ink">About ToolBox India</h2>
-      <p class="mt-3 text-slate-600 leading-relaxed">ToolBox India is an independent collection of simple, free utilities built to be fast and easy on any phone or computer. Every tool runs inside your browser, so the dates, links and text you enter stay on your device. We add new calculators and converters over time and welcome suggestions.</p>
-      <p class="mt-3 text-slate-600 leading-relaxed">Questions or feedback? Email <a class="text-leaf font-semibold underline" href="mailto:your-email@example.com">your-email@example.com</a> (replace with your real address).</p>
-    </div>
-  </section>
-</main>
-
-<footer class="bg-ink text-slate-300">
-  <div class="h-1 flex"><span class="flex-1 bg-saffron"></span><span class="flex-1 bg-white"></span><span class="flex-1 bg-leaf"></span></div>
-  <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between text-sm">
-    <p>&copy; <span id="year">2026</span> ToolBox India. All rights reserved.</p>
-    <nav class="flex flex-wrap gap-x-5 gap-y-2" aria-label="Footer">
-      <a href="#home" class="hover:text-white">Home</a>
-      <a href="#age-calculator" class="hover:text-white">Tools</a>
-      <a href="#age-calculator" class="hover:text-white">Age Calculator</a>
-      <a href="#qr-generator" class="hover:text-white">QR Code Generator</a>
-      <a href="#about" class="hover:text-white">About</a>
-      <a href="privacy.html" class="hover:text-white">Privacy Policy</a>
-      <a href="terms.html" class="hover:text-white">Terms &amp; Conditions</a>
-    </nav>
-  </div>
-</footer>
-
-<script>
-(function () {
-  'use strict';
-  var $ = function (id) { return document.getElementById(id); };
-
-  // ---------- Header ----------
-  $('menu-btn').addEventListener('click', function () {
-    var open = $('mobile-menu').classList.toggle('hidden') === false;
-    this.setAttribute('aria-expanded', open);
-  });
-  $('mobile-menu').addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') { this.classList.add('hidden'); $('menu-btn').setAttribute('aria-expanded', 'false'); }
-  });
-  $('year').textContent = new Date().getFullYear();
-
-  // ---------- Age calculator ----------
-  function pad(n) { return n < 10 ? '0' + n : '' + n; }
-  function toISODate(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
-  function fmt(n) { return Number(n).toLocaleString('en-IN'); }
-  $('dob').max = toISODate(new Date());
-
-  function showAgeError(msg) { var e = $('age-error'); e.textContent = msg; e.classList.remove('hidden'); }
-
-  function calcAge() {
-    $('age-error').classList.add('hidden');
-    $('age-result').classList.add('hidden');
-    var val = $('dob').value;
-    if (!val) { showAgeError('Choose your date of birth to continue.'); return; }
-    var p = val.split('-').map(Number);
-    var dob = new Date(p[0], p[1] - 1, p[2]);
-    var now = new Date();
-    if (isNaN(dob.getTime()) || p[0] < 1900) { showAgeError('Enter a valid date of birth (1900 or later).'); return; }
-    if (dob > now) { showAgeError('Date of birth cannot be in the future.'); return; }
-
-    var y = now.getFullYear() - dob.getFullYear();
-    var m = now.getMonth() - dob.getMonth();
-    var d = now.getDate() - dob.getDate();
-    if (d < 0) { m -= 1; d += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
-    if (m < 0) { y -= 1; m += 12; }
-
-    var diffMs = now - dob;
-    var today0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var next = new Date(now.getFullYear(), dob.getMonth(), dob.getDate());
-    if (next < today0) next = new Date(now.getFullYear() + 1, dob.getMonth(), dob.getDate());
-    var daysLeft = Math.round((next - today0) / 86400000);
-    var nextText = daysLeft === 0 ? 'Today! 🎉' :
-      next.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) +
-      ' (' + daysLeft + (daysLeft === 1 ? ' day' : ' days') + ')';
-
-    $('r-years').textContent = y;
-    $('r-months').textContent = m;
-    $('r-days').textContent = d;
-    $('r-hours').textContent = now.getHours();
-    $('r-minutes').textContent = now.getMinutes();
-    $('t-days').textContent = fmt(Math.floor(diffMs / 86400000));
-    $('t-hours').textContent = fmt(Math.floor(diffMs / 3600000));
-    $('t-minutes').textContent = fmt(Math.floor(diffMs / 60000));
-    $('t-next').textContent = nextText;
-    $('age-result').classList.remove('hidden');
-  }
-  $('age-btn').addEventListener('click', calcAge);
-  $('dob').addEventListener('keydown', function (e) { if (e.key === 'Enter') calcAge(); });
-
-  // ---------- QR generator ----------
-  var qrTimer = null;
-
-  function makeQR() {
-    var text = $('qr-text').value.trim();
-    var out = $('qr-output');
-    var err = $('qr-error');
-    err.classList.add('hidden');
-    out.innerHTML = '';
-
-    if (!text) { $('qr-box').classList.add('hidden'); $('qr-hint').classList.remove('hidden'); return; }
-    if (typeof QRCode === 'undefined') {
-      err.textContent = 'The QR library could not load. Check your internet connection and refresh the page.';
-      err.classList.remove('hidden');
-      return;
-    }
-    var size = parseInt($('qr-size').value, 10) || 256;
-    try {
-      new QRCode(out, { text: text, width: size, height: size, colorDark: '#14213d', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
-      $('qr-box').classList.remove('hidden');
-      $('qr-hint').classList.add('hidden');
-    } catch (e) {
-      out.innerHTML = '';
-      $('qr-box').classList.add('hidden');
-      err.textContent = 'That text is too long for a QR code. Shorten it and try again.';
-      err.classList.remove('hidden');
-    }
-  }
-  $('qr-text').addEventListener('input', function () { clearTimeout(qrTimer); qrTimer = setTimeout(makeQR, 150); });
-  $('qr-size').addEventListener('change', makeQR);
-
-  $('qr-download').addEventListener('click', function () {
-    var out = $('qr-output');
-    var canvas = out.querySelector('canvas');
-    var img = out.querySelector('img');
-    var url = '';
-    try {
-      if (canvas) url = canvas.toDataURL('image/png');
-      else if (img && img.src) url = img.src;
-    } catch (e) { url = img && img.src ? img.src : ''; }
-    if (!url) return;
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'toolbox-india-qr.png';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  });
-})();
-</script>
-</body>
-</html>
+        
